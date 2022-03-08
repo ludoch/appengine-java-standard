@@ -17,6 +17,7 @@ jobs:
 
       - name: Check input
         run: |
+          git config --global init.defaultBranch origin/main
           if [[ ! "${{ github.event.inputs.release_version }}" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
             echo 'version "${{ github.event.inputs.release_version }}" not in ###.###.### format'
             exit 1
@@ -27,7 +28,6 @@ jobs:
           fi
       - name: Create tag for release and prepare branch for next development version
         run: |
-          git config --global init.defaultBranch main
           git checkout -b release-v${{ github.event.inputs.release_version }}
           git config user.email ${{ github.actor }}@users.noreply.github.com
           git config user.name ${{ github.actor }}
