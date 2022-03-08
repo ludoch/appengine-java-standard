@@ -6,16 +6,6 @@ on:
         description: new release version
         required: true
         default: (for example, 0.10.5)
-      user:
-        description: user
-        required: true
-        default: ludoch
-      password:
-        description: password
-        required: true
-      passphrase:
-        description: passphrase
-        required: true
 
 jobs:
   release:
@@ -40,7 +30,7 @@ jobs:
           git checkout -b release-v${{ github.event.inputs.release_version }}
           git config user.email ${{ github.actor }}@users.noreply.github.com
           git config user.name ${{ github.actor }}
-          ./mvnw --batch-mode versions:set versions:commit  -Dusername=${{ github.event.inputs.user }} -DDpassword=${{ github.event.inputs.password }} -Dgpg.passphrase=${{ github.event.inputs.passphrase }}
+          ./mvnw --batch-mode versions:set versions:commit  -Dusername=${{ secrets.SONATYPE_USER }} -Dpassword=${{ secrets.SONATYPE_PASSWORD }} -Dgpg.passphrase=${{ secrets.SONATYPE_PASSPHRASE }}
 
           # ./mvnw --batch-mode versions:set versions:commit -DnewVersion=${{ github.event.inputs.release_version }}
           # git commit -am "preparing release ${{ github.event.inputs.release_version }}"
