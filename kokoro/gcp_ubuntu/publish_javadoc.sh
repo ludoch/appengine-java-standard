@@ -36,7 +36,7 @@ fi
 
 if [[ -z "${STAGING_BUCKET_V2}" ]]; then
   echo "Setting STAGING_BUCKET_V2 environment variable to default value."
-  STAGING_BUCKET_V2=docs-staging-v2
+  STAGING_BUCKET_V2=docs-staging-v2-dev
 fi
 
 git clone https://github.com/GoogleCloudPlatform/appengine-java-standard.git
@@ -53,7 +53,7 @@ sudo update-java-alternatives --set java-1.11.0-openjdk-amd64
 export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
 echo "JAVA_HOME = $JAVA_HOME"
 # Do a build of all dependent modules first.
-../mvnw install -B -q -DskipTests=true
+./mvnw install -B -q -DskipTests=true
 
 # Then do a build in api/ for cloud RAD generation.
 cd api
@@ -64,12 +64,15 @@ cd api
 
 pushd target/docfx-yml
 
-# create metadata
+# create metadata for Java11/17
 python3 -m docuploader create-metadata \
- --name ${NAME} \
- --version ${VERSION} \
+ --name appengine-java-gen2-bundled-services \
+ --version 2.0.0 \
+ --stem appengine/docs/standard/java-gen2/reference/services/bundled \
  --language java
-echo "Done creating metadata."
+
+
+ echo "Done creating metadata."
 
 # upload yml to production bucket
 python3 -m docuploader upload . \
