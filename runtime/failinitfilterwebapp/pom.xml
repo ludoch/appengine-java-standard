@@ -23,11 +23,10 @@
     <version>1.0</version>
 
     <groupId>com.google.appengine.demos</groupId>
-    <artifactId>nogaeapiswebapp</artifactId>
-    <name>AppEngine :: nogaeapiswebapp</name>
+    <artifactId>failinitfilterwebapp</artifactId>
+    <name>AppEngine :: failinitfilterwebapp</name>
 
     <properties>
-        <maven.deploy.skip>true</maven.deploy.skip>
         <appengine.app.version>1</appengine.app.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
@@ -65,6 +64,17 @@
                 <configuration>
                     <source>1.8</source>
                     <target>1.8</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>com.google.cloud.tools</groupId>
+                <artifactId>appengine-maven-plugin</artifactId>
+                <version>2.4.1</version>
+                <configuration>
+                    <projectId>ludo-in-in</projectId>
+                    <version>failinitfilter</version>
+                    <promote>false</promote>
+                    <automaticRestart>true</automaticRestart>
                 </configuration>
             </plugin>
         </plugins>
