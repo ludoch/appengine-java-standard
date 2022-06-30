@@ -44,13 +44,14 @@
     <module>quickstartgenerator</module>
     <module>sdk_assembly</module>
     <module>applications</module>
+    <module>appengine_testing_tests</module>
   </modules>
 
   <properties>
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <jetty.version>9.4.45.v20220203</jetty.version>
+    <jetty.version>9.4.46.v20220331</jetty.version>
     <distributionManagement.snapshot.url>https://oss.sonatype.org/content/repositories/google-snapshots/</distributionManagement.snapshot.url>
     <distributionManagement.snapshot.id>sonatype-nexus-snapshots</distributionManagement.snapshot.id>
     <distributionManagement.release.url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</distributionManagement.release.url>
@@ -187,7 +188,6 @@
                       <configuration>
                           <systemPropertyVariables>
                               <appengine.runtime.dir>../deployment/target/runtime-deployment-${project.version}</appengine.runtime.dir>
-                              <use.jetty94>true</use.jetty94>
                               <com.google.apphosting.runtime.jetty94.LEGACY_MODE>true</com.google.apphosting.runtime.jetty94.LEGACY_MODE>
                           </systemPropertyVariables>
                           <!-- Most of these tests were developed with Google's build system, which runs each test
@@ -214,7 +214,6 @@
                       <configuration>
                           <systemPropertyVariables>
                               <appengine.runtime.dir>../deployment/target/runtime-deployment-${project.version}</appengine.runtime.dir>
-                              <use.jetty94>true</use.jetty94>
                               <com.google.apphosting.runtime.jetty94.LEGACY_MODE>true</com.google.apphosting.runtime.jetty94.LEGACY_MODE>
                           </systemPropertyVariables>
                           <argLine>
