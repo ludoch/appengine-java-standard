@@ -14,15 +14,15 @@
  * limitations under the License.
  */
 
-package com.google.apphosting.runtime.jetty94;
+package com.example.appengine.demos.springboot;
 
-import com.google.apphosting.runtime.AppVersion;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-/** This factory creates {@link AppEngineWebAppContext}. */
-public class AppEngineWebAppContextFactory implements WebAppContextFactory {
+@SpringBootApplication
+public class SpringBootExampleApplication {
 
-  @Override
-  public AppEngineWebAppContext createContext(AppVersion appVersion, String serverInfo) {
-    return new AppEngineWebAppContext(appVersion.getRootDirectory(), serverInfo);
+  public static void main(String[] args) {
+    SpringApplication.run(SpringBootExampleApplication.class, args);
   }
 }

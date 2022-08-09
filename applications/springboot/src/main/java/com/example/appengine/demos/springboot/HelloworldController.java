@@ -14,15 +14,15 @@
  * limitations under the License.
  */
 
-package com.google.apphosting.runtime.jetty94;
+package com.example.appengine.demos.springboot;
 
-import com.google.apphosting.runtime.AppVersion;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-/** This factory creates {@link AppEngineWebAppContext}. */
-public class AppEngineWebAppContextFactory implements WebAppContextFactory {
-
-  @Override
-  public AppEngineWebAppContext createContext(AppVersion appVersion, String serverInfo) {
-    return new AppEngineWebAppContext(appVersion.getRootDirectory(), serverInfo);
+@RestController
+public class HelloworldController {
+  @GetMapping("/")
+  public String hello() {
+    return "Hello world - springboot-appengine-standard!";
   }
 }
