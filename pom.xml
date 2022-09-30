@@ -19,7 +19,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.google.appengine</groupId>
   <artifactId>parent</artifactId>
-  <version>2.0.7-SNAPSHOT</version>
+  <version>2.0.10.SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>AppEngine :: Parent project</name>
   <modules>
@@ -51,7 +51,7 @@
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <jetty.version>9.4.48.v20220622</jetty.version>
+    <jetty.version>9.4.49.v20220914</jetty.version>
     <distributionManagement.snapshot.url>https://oss.sonatype.org/content/repositories/google-snapshots/</distributionManagement.snapshot.url>
     <distributionManagement.snapshot.id>sonatype-nexus-snapshots</distributionManagement.snapshot.id>
     <distributionManagement.release.url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</distributionManagement.release.url>
@@ -170,6 +170,17 @@
                               </goals>
                           </execution>
                       </executions>
+                  </plugin>
+                  <plugin>
+                    <groupId>org.sonatype.plugins</groupId>
+                    <artifactId>nexus-staging-maven-plugin</artifactId>
+                    <version>1.6.13</version>
+                    <extensions>true</extensions>
+                    <configuration>
+                      <serverId>${distributionManagement.snapshot.id}</serverId>
+                      <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+                      <autoReleaseAfterClose>true</autoReleaseAfterClose>
+                    </configuration>
                   </plugin>
               </plugins>
           </build>
@@ -344,8 +355,13 @@
       <dependency>
          <groupId>com.google.api-client</groupId>
          <artifactId>google-api-client-appengine</artifactId>
-         <version>1.35.2</version>
-     </dependency>
+         <version>2.0.0</version>
+      </dependency>
+      <dependency>
+        <groupId>com.google.api-client</groupId>
+        <artifactId>google-api-client</artifactId>
+        <version>2.0.0</version>
+      </dependency>
       <dependency>
         <groupId>com.google.appengine</groupId>
         <artifactId>jcache-api</artifactId>
@@ -431,11 +447,6 @@
         <version>1.11</version> <!--keep-->
       </dependency>
       <dependency>
-        <groupId>com.google.api-client</groupId>
-        <artifactId>google-api-client</artifactId>
-        <version>1.35.2</version>
-      </dependency>
-      <dependency>
         <groupId>com.google.api.grpc</groupId>
         <artifactId>proto-google-cloud-datastore-v1</artifactId>
         <version>0.101.1</version>
@@ -474,7 +485,7 @@
       <dependency>
         <groupId>com.google.errorprone</groupId>
         <artifactId>error_prone_annotations</artifactId>
-        <version>2.14.0</version>
+        <version>2.15.0</version>
       </dependency>
       <dependency>
         <groupId>com.google.http-client</groupId>
@@ -495,12 +506,12 @@
       <dependency>
         <groupId>com.google.protobuf</groupId>
         <artifactId>protobuf-java</artifactId>
-        <version>3.21.4</version>
+        <version>3.21.5</version>
       </dependency>
       <dependency>
         <groupId>com.google.protobuf</groupId>
         <artifactId>protobuf-java-util</artifactId>
-        <version>3.21.4</version>
+        <version>3.21.5</version>
       </dependency>
       <dependency>
         <groupId>javax.activation</groupId>
@@ -551,7 +562,7 @@
       <dependency>
         <groupId>org.checkerframework</groupId>
         <artifactId>checker-qual</artifactId>
-        <version>3.23.0</version>
+        <version>3.24.0</version>
         <scope>provided</scope>
       </dependency>
       <dependency>
@@ -585,7 +596,7 @@
       <dependency>
         <groupId>org.jsoup</groupId>
         <artifactId>jsoup</artifactId>
-        <version>1.15.2</version>
+        <version>1.15.3</version>
       </dependency>
       <dependency>
         <groupId>org.apache.lucene</groupId>
@@ -615,22 +626,22 @@
       <dependency>
         <groupId>io.grpc</groupId>
         <artifactId>grpc-api</artifactId>
-        <version>1.48.0</version>
+        <version>1.49.0</version>
       </dependency>
       <dependency>
         <groupId>io.grpc</groupId>
         <artifactId>grpc-stub</artifactId>
-        <version>1.48.0</version>
+        <version>1.49.0</version>
       </dependency>
       <dependency>
         <groupId>io.grpc</groupId>
         <artifactId>grpc-protobuf</artifactId>
-        <version>1.48.0</version>
+        <version>1.49.0</version>
       </dependency>
       <dependency>
          <groupId>io.grpc</groupId>
          <artifactId>grpc-netty</artifactId>
-         <version>1.48.0</version>
+         <version>1.49.0</version>
       </dependency>
       <dependency>
         <groupId>org.apache.tomcat</groupId>
@@ -645,7 +656,7 @@
       <dependency>
         <groupId>joda-time</groupId>
         <artifactId>joda-time</artifactId>
-        <version>2.10.14</version>
+        <version>2.11.1</version>
       </dependency>
       <dependency>
         <groupId>org.json</groupId>
@@ -686,7 +697,7 @@
       <dependency>
         <groupId>org.mockito</groupId>
         <artifactId>mockito-core</artifactId>
-        <version>4.5.1</version>
+        <version>4.7.0</version>
         <scope>test</scope>
       </dependency>
       <dependency>
@@ -694,6 +705,11 @@
         <artifactId>mockito-junit-jupiter</artifactId>
         <version>4.5.1</version>
         <scope>test</scope>
+      </dependency>
+      <dependency>
+        <groupId>com.google.cloud</groupId>
+        <artifactId>google-cloud-logging</artifactId>
+        <version>3.10.4</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
@@ -738,7 +754,8 @@
           </configuration>
         </plugin>
         <plugin>
-          <artifactId>maven-assembly-plugin</artifactId>
+         <groupId>org.apache.maven.plugins</groupId>
+         <artifactId>maven-assembly-plugin</artifactId>
           <version>3.4.2</version>
         </plugin>
         <plugin>
@@ -757,7 +774,7 @@
           <configuration>
             <useReleaseProfile>false</useReleaseProfile>
             <goals>deploy</goals>
-            <arguments>-Psonatype-release</arguments>
+            <arguments>-Psonatype-release -DskipTests</arguments>
             <preparationGoals>clean install</preparationGoals>
             <mavenExecutorId>forked-path</mavenExecutorId>
             <pushChanges>false</pushChanges>
@@ -770,6 +787,7 @@
            <version>3.3.0</version>
         </plugin>
         <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-shade-plugin</artifactId>
           <version>3.3.0</version>
         </plugin>
@@ -782,7 +800,7 @@
                  https://github.com/protocolbuffers/protobuf/blob/master/java/pom.xml#L7
                  Read https://github.com/os72/protoc-jar-maven-plugin/issues/107 for context.
              -->
-             <protocVersion>3.21.4</protocVersion>
+             <protocVersion>3.21.5</protocVersion>
           </configuration>
         </plugin>
         <plugin>
@@ -799,6 +817,29 @@
            <groupId>org.codehaus.mojo</groupId>
            <artifactId>javacc-maven-plugin</artifactId>
            <version>2.6</version>
+        </plugin>
+        <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>license-maven-plugin</artifactId>
+          <version>2.0.0</version>
+          <configuration>
+            <excludedGroups>com.google.appengine</excludedGroups>
+            <useMissingFile>true</useMissingFile>
+            <missingFile>${project.basedir}/licenses/resources/third-party-missing-licenses.properties</missingFile>
+            <licenseMerges>
+              <licenseMerge>Apache License, Version 2.0|The Apache Software License, Version 2.0|Apache Software License - Version 2.0|Apache-2.0|Apache 2.0|Apache 2|The Apache License, Version 2.0|Apache License 2.0|Apache License Version 2.0</licenseMerge>
+              <licenseMerge>Eclipse Public License 1.0|Eclipse Public License - v 1.0|</licenseMerge>
+              <licenseMerge>Eclipse Public License 2.0|Eclipse Public License - v 2.0|Eclipse Public License v2.0|EPL 2.0</licenseMerge>
+              <licenseMerge>CDDL + GPLv2|CDDL + GPLv2 with classpath exception</licenseMerge>
+              <licenseMerge>The MIT License|MIT license|MIT License</licenseMerge>
+              <licenseMerge>GNU General Public License, version 2|GNU General Public License, version 2 (GPL2), with the classpath exception|GPL2 w/ CPE|The GNU General Public License, v2 with FOSS exception|GNU General Public License Version 2</licenseMerge>
+              <licenseMerge>BSD License|BSD|BSD licence</licenseMerge>
+              <licenseMerge>The 3-Clause BSD License|New BSD License|BSD New license|BSD-3-Clause|BSD License 3|BSD 3-clause</licenseMerge>
+              <licenseMerge>Eclipse Distribution License 1.0 (BSD)|Eclipse Distribution License - v 1.0|EDL 1.0</licenseMerge>
+            </licenseMerges>
+            <outputDirectory>${project.basedir}</outputDirectory>
+            <fileTemplate>${project.basedir}/licenses/resources/third-party-file-template.ftl</fileTemplate>
+          </configuration>
         </plugin>
       </plugins>
     </pluginManagement>

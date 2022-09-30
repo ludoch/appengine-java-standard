@@ -20,7 +20,7 @@
     <parent>
         <groupId>com.google.appengine</groupId>
         <artifactId>parent</artifactId>
-        <version>2.0.7-SNAPSHOT</version>
+        <version>2.0.10.SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>appengine-java-sdk</artifactId>
@@ -53,6 +53,26 @@
                                 <resource>
                                     <directory>${basedir}/src/main/resources</directory>
                                     <filtering>true</filtering>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>copy-licenses</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${assembly-directory}</outputDirectory>
+                            <encoding>UTF-8</encoding>
+                            <resources>
+                                <resource>
+                                    <directory>${basedir}/..</directory>
+                                    <includes>
+                                        <include>LICENSE</include>
+                                        <include>THIRD-PARTY.txt</include>
+                                    </includes>
                                 </resource>
                             </resources>
                         </configuration>
@@ -259,6 +279,7 @@
                             </target>
                             <tasks>
                                 <delete file="${assembly-directory}/jetty94/jetty-home/lib/apache-jsp/org.eclipse.jetty.apache-jsp-${jetty.version}.jar"/>
+                                <delete dir="${assembly-directory}/jetty94/jetty-home/demo-base"/>
                             </tasks>
                         </configuration>
                     </execution>
@@ -284,6 +305,21 @@
                             <descriptors>
                                 <descriptor>src/main/assembly/assembly.xml</descriptor>
                             </descriptors>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>cloud-sdk</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                        <configuration>
+                            <overrideUid>0</overrideUid>
+                            <overrideGid>0</overrideGid>
+                            <descriptors>
+                                <descriptor>src/main/assembly/cloud-sdk-assembly.xml</descriptor>
+                            </descriptors>
+                              <finalName>google_appengine_java_delta_${project.version}</finalName>
                         </configuration>
                     </execution>
                     <!--execution>

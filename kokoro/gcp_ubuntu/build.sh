@@ -32,7 +32,9 @@ mkdir ${KOKORO_ARTIFACTS_DIR}/maven-artifacts
 # Remove jars we do not need in google3.
 ls **/*.jar
 rm **/target/*sources.jar || true
+rm **/target/*tests.jar || true
 
+# LINT.IfChange
 cp api_legacy/target/appengine-api-legacy*.jar ${KOKORO_ARTIFACTS_DIR}/maven-artifacts/appengine-api-legacy.jar
 cp appengine-api-1.0-sdk/target/appengine-api-1.0-sdk*.jar ${KOKORO_ARTIFACTS_DIR}/maven-artifacts/appengine-api-1.0-sdk.jar
 cp appengine-api-stubs/target/appengine-api-stubs*.jar ${KOKORO_ARTIFACTS_DIR}/maven-artifacts/appengine-api-stubs.jar
@@ -51,7 +53,5 @@ cp quickstartgenerator/target/quickstartgenerator*.jar ${KOKORO_ARTIFACTS_DIR}/m
 cp -rf sdk_assembly/target/appengine-java-sdk ${KOKORO_ARTIFACTS_DIR}/maven-artifacts/
 # Make binaries executable.
 chmod a+x ${KOKORO_ARTIFACTS_DIR}/maven-artifacts/appengine-java-sdk/bin/*
-# Also create the area for the Cloud SDK deliverable in google_appengine_java_delta.
-mkdir -p ${KOKORO_ARTIFACTS_DIR}/maven-artifacts/google_appengine_java_delta/google/appengine/tools/java/
-cp -pr ${KOKORO_ARTIFACTS_DIR}/maven-artifacts/appengine-java-sdk/* ${KOKORO_ARTIFACTS_DIR}/maven-artifacts/google_appengine_java_delta/google/appengine/tools/java
-
+# LINT.ThenChange(//depot/google3/third_party/java_src/appengine_standard/check_build.sh)
+cp sdk_assembly/target/google_appengine_java_delta*.zip ${KOKORO_ARTIFACTS_DIR}/maven-artifacts/google_appengine_java_delta.zip
