@@ -95,14 +95,19 @@ echo "Using release number="$RELEASE_NUMBER
 # Work in a $RELEASE_NUMBER branch, not main.
 git checkout -b $RELEASE_NUMBER
 
-# Make sure `JAVA_HOME` is set.
-echo "JAVA_HOME = $JAVA_HOME"
-# compile all packages
-echo "Calling release:prepare and perform."
-./mvnw release:prepare release:perform -B -q --settings=../settings.xml -DskipTests -Darguments=-DskipTests -Dgpg.homedir=${GNUPGHOME} -Dgpg.passphrase=${GPG_PASSPHRASE}
-
 git config user.email gae-java-bot@google.com
 git config user.name gae-java-bot
+
+# Make sure `JAVA_HOME` is set.
+echo "JAVA_HOME = $JAVA_HOME"
+
+# Install Maven.
+sudo apt-get -qq update && sudo apt-get -qq install -y maven
+
+# compile all packages
+echo "Calling release:prepare and release:perform."
+mvn release:prepare release:perform -B -q --settings=../settings.xml -DskipTests -Darguments=-DskipTests -Dgpg.homedir=${GNUPGHOME} -Dgpg.passphrase=${GPG_PASSPHRASE}
+
 git remote set-url origin https://gae-java-bot:${GAE_JAVA_BOT_GITHUB_TOKEN}@github.com/GoogleCloudPlatform/appengine-java-standard
 echo "Doing git tag and push."
 git tag -a v$RELEASE_NUMBER -m v$RELEASE_NUMBER
